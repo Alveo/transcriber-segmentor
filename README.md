@@ -12,7 +12,3 @@ Python application to support segmentation of audio files for alveo-transcriber.
 
 4. Run the Flask application
   - python manage.py runserver
-
-
-# Credits
-Segmentor code by Navid Shokouhi (July 2017)
