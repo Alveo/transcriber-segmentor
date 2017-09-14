@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE, STDOUT
 
+import re
 import json
 from flask import redirect
 
@@ -20,9 +21,8 @@ def serve():
 
 @app.route('/api/segment')
 def segment():
-    # TODO accept a URL
-    # TODO download from URL
-    # TODO return file as JSON
+    # TODO accept & download from URL
+
     wave_file = './static/test.wav'
 
     command = '%s/ssad -m 1.0 -a -s -f %s %s -'
@@ -33,4 +33,12 @@ def segment():
             stdin=PIPE, stdout=PIPE, stderr=STDOUT);
     output = p.communicate()[0]
 
-    return output
+    json = []
+    output = re.split(r'\n', output)
+
+    for line in output:
+        line = re.split(r'\s{4,}', line)
+        if line[0] == "speech":
+            json += {'start': line[1], 'end': line[2]},
+
+    return json
