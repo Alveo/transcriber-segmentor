@@ -20,6 +20,7 @@ def serve():
 
 @app.route('/api/segment')
 def segment():
+    url = request.args.get('url', default=None, type=str)
     # TODO accept & download from URL
 
     wave_file = 'test.wav'
@@ -27,7 +28,7 @@ def segment():
     command = '%s/ssad -m 1.0 -a -s -f %s %s -'
     exe_cmd = command%('/home/audioseg/audioseg-1.2.2/src/', "16000.0", wave_file)
 
-    p=Popen(['/home/audioseg/audioseg-1.2.2/src/ssad',
+    p=Popen([app.config['SSAD_PATH'],
             '-m 1.0', '-a', '-s', '-f', '16000.0', wave_file, '-'],
             stdin=PIPE, stdout=PIPE, stderr=STDOUT);
     output = str(p.communicate()[0])

@@ -17,3 +17,6 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge ex
 
 # Time configuration
 TIMEZONE = 'Australia/Sydney'
+
+# Audioseg configuration
+SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
