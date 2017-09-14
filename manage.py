@@ -36,7 +36,7 @@ def gendb(type):
 @manager.command
 def runserver(force=False):
     if app.config['DEBUG'] or force:
-        app.run()
+        app.run(host='0.0.0.0')
     else:
         print("Error: Configuration is not in debug mode and not expected to run through this interface. Please launch via Gunicorn instead or use the --force option.")
 
