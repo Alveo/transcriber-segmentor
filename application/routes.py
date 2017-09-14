@@ -1,8 +1,7 @@
 from subprocess import Popen, PIPE, STDOUT
 
 import re
-import json
-from flask import redirect
+from flask import redirect, jsonify
 
 from application import app
 from application.modules.error_views import not_allowed, not_found, server_error
@@ -23,7 +22,7 @@ def serve():
 def segment():
     # TODO accept & download from URL
 
-    wave_file = './static/test.wav'
+    wave_file = 'test.wav'
 
     command = '%s/ssad -m 1.0 -a -s -f %s %s -'
     exe_cmd = command%('/home/audioseg/audioseg-1.2.2/src/', "16000.0", wave_file)
@@ -31,14 +30,14 @@ def segment():
     p=Popen(['/home/audioseg/audioseg-1.2.2/src/ssad',
             '-m 1.0', '-a', '-s', '-f', '16000.0', wave_file, '-'],
             stdin=PIPE, stdout=PIPE, stderr=STDOUT);
-    output = p.communicate()[0]
+    output = str(p.communicate()[0])
 
     json = []
-    output = re.split(r'\n', output)
+    output = re.split(r'\\n', output)
 
     for line in output:
         line = re.split(r'\s{4,}', line)
         if line[0] == "speech":
             json += {'start': line[1], 'end': line[2]},
 
-    return json
+    return jsonify(json)
