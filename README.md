@@ -1,6 +1,9 @@
 # transcriber-segmentor
 Python application to support segmentation of audio files for alveo-transcriber.
 
+# Requirements
+- Audioseg
+
 # Setup 
 1. Recommended: Set up a python3 virtual environment
 
