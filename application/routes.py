@@ -61,9 +61,11 @@ def segment_upload():
             downloader = PostDownloader(filename, filedata)
             downloader.save()
 
-            # Run segmentor.isValid
-            # Segment
-            status = "Success"
+            processor = AudioSegmentor(filename)
+            if processor.isValid():
+                status = jsonify(processor.segment())
+            else: 
+                status = "{error: \"Uploaded file is not a valid .wav audio file.\"}"
         else:
             status = "{error: \"No file selected in query.\"}"
     else:
