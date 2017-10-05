@@ -52,9 +52,8 @@ def url_download():
 
     if downloader.isValid():
         if not downloader.isAlveo():
-            # TODO config for tmp dir
             # generate uuid4
-            filename = '/tmp/'+str(uuid.uuid4())
+            filename = app.config['DOWNLOAD_CACHE_PATH'] + str(uuid.uuid4())
             status = downloader.download(filename);
 
             print("DEBUG: Downloading to: "+filename)
