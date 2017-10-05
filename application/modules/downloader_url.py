@@ -4,6 +4,8 @@ import urllib.request
 import urllib.error
 import urllib.parse
 
+import pyalveo
+
 from application import app
 
 class URLDownloader:
@@ -50,15 +52,32 @@ class URLDownloader:
 
         Returns a HTTP status code. If it is not 200, it would be a safe assumption to say the download failed. """
         exit_code = 200
-
         self._validate_path()
+
+        if not self.isAlveo():
+            exit_code = self._genericDownload();
+            if exit_code is 200:
+                self.downloaded = True
+        else:
+            exit_code = self._alveoDownload();
+
+        return exit_code
+
+    def _alveoDownload(self):
+        exit_code = -1
+
+        return exit_code
+
+    def _genericDownload(self):
+        exit_code = 200
 
         try:
             with urllib.request.urlopen(self.url) as response, open(self.filename, 'wb') as file_handle:
                 shutil.copyfileobj(response, file_handle)
-                self.downloaded = True
         except urllib.error.HTTPError as exception:
             exit_code = exception.code
+        except urllib.error.URLError as exception:
+            exit_code = exception.reason
 
         return exit_code
 
