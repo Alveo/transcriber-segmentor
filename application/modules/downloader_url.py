@@ -1,6 +1,17 @@
 import shutil
 import urllib.request
 import urllib.error
+import urllib.parse
+
+def isValid(url):
+    valid = False
+
+    schema = urllib.parse.urlparse(url)
+
+    if schema.scheme != '' and schema.netloc != '':
+        valid = True
+
+    return valid
 
 def download(url, filename):
     """ Downloads a file from the specified URL to the specified destination.
