@@ -3,6 +3,7 @@ from subprocess import Popen, PIPE, STDOUT
 import re
 import uuid
 from flask import redirect, jsonify, request
+import sndhdr
 
 from application import app
 from application.modules.error_views import not_allowed, not_found, server_error
@@ -52,15 +53,20 @@ def url_download():
 
     if downloader.isValid():
         if not downloader.isAlveo():
-            # generate uuid4
             filename = app.config['DOWNLOAD_CACHE_PATH'] + str(uuid.uuid4())
+
             status = downloader.download(filename);
 
-            print("DEBUG: Downloading to: "+filename)
-
             # Confirm the file type is audio
-
-            return str(status)
+            if status == 200:
+                print("DEBUG: Downloaded to: "+filename)
+                output = sndhdr.whathdr(filename);
+                if output is not None:
+                    return output.filetype
+                else:
+                    return "{error: \"Specified URL did not contain a valid audio file.\"}"
+            else:
+                return "{error: \""+str(status)+"\"}"
         else:
             return "{error: \"Alveo URLs are currently not supported.\"}"
     else:
