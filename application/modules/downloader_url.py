@@ -7,6 +7,7 @@ import urllib.parse
 from application import app
 
 class URLDownloader:
+    """ URLDownloader is a class for managing the process of validating, downloading and cleaning up a file. """
     def __init__(self, url, filename):
         self.url = url
         self.filename = filename
@@ -31,7 +32,7 @@ class URLDownloader:
             self.alveoURL = True
 
     def _validate_path(self):
-        """ Validates whether the directory exists or not. Creates the directory if it does not exist. """
+        """ Validates whether the directory exists or not. Creates the directory if it does not exist. Should not be called from outside the class. """
         directory = os.path.dirname(os.path.realpath(self.filename))
         if not os.path.exists(directory):
             os.makedirs(directory)
