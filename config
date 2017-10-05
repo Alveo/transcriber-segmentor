@@ -24,5 +24,6 @@ SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
 # Downloader configuration
 DOWNLOAD_CACHE_PATH = '/tmp/transcriber-segmentor/'
 ALVEO_DOMAINS = ['alveo.edu.au',
+                 'app.alveo.edu.au',
                  'www.alveo.edu.au',
                  'staging.alveo.edu.au']
