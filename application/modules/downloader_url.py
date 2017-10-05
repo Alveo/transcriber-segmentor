@@ -7,9 +7,11 @@ import urllib.parse
 from application import app
 
 class URLDownloader:
-    def __init__(self, url):
+    def __init__(self, url, filename):
         self.url = url
+        self.filename = filename
         
+        self.downloaded = False
         self.validURL = False
         self.alveoURL = False
 
@@ -28,6 +30,12 @@ class URLDownloader:
         if schema.netloc in app.config['ALVEO_DOMAINS']:
             self.alveoURL = True
 
+    def _validate_path(self):
+        """ Validates whether the directory exists or not. Creates the directory if it does not exist. """
+        directory = os.path.dirname(os.path.realpath(self.filename))
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
     def isValid(self):
         """ Returns true if the URL protocol and address is valid. """
         return self.validURL
@@ -36,23 +44,25 @@ class URLDownloader:
         """ Returns true if the address matches an Alveo domain. """
         return self.alveoURL
 
-    def _validate_path(self, filename):
-        directory = os.path.dirname(os.path.realpath(filename))
-        if not os.path.exists(directory):
-            os.makedirs(directory)
-
-    def download(self, filename):
+    def download(self):
         """ Downloads a file from the specified URL to the specified destination.
 
         Returns a HTTP status code. If it is not 200, it would be a safe assumption to say the download failed. """
         exit_code = 200
 
-        self._validate_path(filename)
+        self._validate_path()
 
         try:
-            with urllib.request.urlopen(self.url) as response, open(filename, 'wb') as file_handle:
+            with urllib.request.urlopen(self.url) as response, open(self.filename, 'wb') as file_handle:
                 shutil.copyfileobj(response, file_handle)
+                self.downloaded = True
         except urllib.error.HTTPError as exception:
             exit_code = exception.code
 
         return exit_code
+
+    def cleanup(self):
+        """ Erases any downloaded data. """
+        if self.downloaded:
+            os.remove(self.filename)
+            self.downloaded = False
