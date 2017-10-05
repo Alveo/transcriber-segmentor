@@ -1,10 +1,12 @@
 from subprocess import Popen, PIPE, STDOUT
 
 import re
-from flask import redirect, jsonify
+import uuid
+from flask import redirect, jsonify, request
 
 from application import app
 from application.modules.error_views import not_allowed, not_found, server_error
+from application.modules.downloader_url import URLDownloader
 
 app.register_error_handler(403, not_allowed)
 app.register_error_handler(404, not_found)
@@ -42,3 +44,25 @@ def segment():
             json += {'start': line[1], 'end': line[2]},
 
     return jsonify(json)
+
+@app.route('/api/segment/url')
+def url_download():
+    url = request.args.get('url', default="", type=str)
+    downloader = URLDownloader(url)
+
+    if downloader.isValid():
+        if not downloader.isAlveo():
+            # TODO config for tmp dir
+            # generate uuid4
+            filename = '/tmp/'+str(uuid.uuid4())
+            status = downloader.download(filename);
+
+            print("DEBUG: Downloading to: "+filename)
+
+            # Confirm the file type is audio
+
+            return str(status)
+        else:
+            return "{error: \"Alveo URLs are currently not supported.\"}"
+    else:
+        return "{error: \"URL pattern is not valid. Example: http://example.com/\"}"
