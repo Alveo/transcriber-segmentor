@@ -1,5 +1,6 @@
 from subprocess import Popen, PIPE, STDOUT
 
+import os
 import re
 import uuid
 from flask import redirect, jsonify, request
@@ -59,12 +60,16 @@ def url_download():
 
             # Confirm the file type is audio
             if status == 200:
-                print("DEBUG: Downloaded to: "+filename)
                 output = sndhdr.whathdr(filename);
-                if output is not None:
-                    return output.filetype
-                else:
-                    return "{error: \"Specified URL did not contain a valid audio file.\"}"
+                if output is not "wav":
+                    if output.filetype is "wav":
+
+                        os.remove(filename)
+                        return "Segment"
+
+                # Cleanup
+                os.remove(filename)
+                return "{error: \"Specified URL did not contain a valid .wav audio file.\"}"
             else:
                 return "{error: \""+str(status)+"\"}"
         else:
