@@ -37,8 +37,8 @@ def url_download():
                 processor = AudioSegmentor(filename)
                 if processor.isValid():
                     status = jsonify(processor.segment())
-
-                status = "{error: \"Specified URL did not contain a valid .wav audio file.\"}"
+                else: 
+                    status = "{error: \"Specified URL did not contain a valid .wav audio file.\"}"
             else:
                 status = "{error: \"Resource returned error code "+str(status)+"\".}"
         else:
