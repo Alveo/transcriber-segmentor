@@ -9,7 +9,10 @@ import pyalveo
 from application import app
 
 class URLDownloader:
-    """ URLDownloader is a class for managing the process of validating, downloading and cleaning up a file. """
+    """ URLDownloader is a class for managing the process of validating, downloading and cleaning up a file.
+
+        Supports the Alveo service for AusTalk data. """
+
     def __init__(self, url, filename):
         self.url = url
         self.filename = filename
@@ -64,11 +67,22 @@ class URLDownloader:
         return exit_code
 
     def _alveoDownload(self):
-        exit_code = -1
+        """ Attempts to download via the Alveo service. """
+        exit_code = 200
+
+        # TODO Alveo exceptions
+        client = pyalveo.Client(use_cache=False)
+        doc = client.get_document(self.url)
+
+        # TODO File exceptions
+        f = open(self.filename, 'wb')
+        f.write(doc)
+        f.close()
 
         return exit_code
 
     def _genericDownload(self):
+        """ Attempts to download via a generic URL. """
         exit_code = 200
 
         try:
