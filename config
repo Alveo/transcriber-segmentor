@@ -7,6 +7,7 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge ex
 SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
 
 # Downloader configuration
+ALLOW_GENERIC_URL = True
 DOWNLOAD_CACHE_PATH = '/tmp/transcriber-segmentor/'
 ALVEO_DOMAINS = ['alveo.edu.au',
                  'app.alveo.edu.au',

@@ -43,7 +43,7 @@ def segment_url():
         else:
             status = "{error: \"Resource returned error code "+str(status)+"\".}"
     else:
-        status = "{error: \"URL pattern is not valid. Example: http://example.com/\"}"
+        status = "{error: \"URL pattern is either not valid or not allowed. Example: http://example.com/\"}"
 
     if status is "":
         status = "{error: \"An unknown error occurred.\"}"

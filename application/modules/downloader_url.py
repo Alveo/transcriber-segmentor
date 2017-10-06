@@ -30,11 +30,12 @@ class URLDownloader:
         self.validURL = False
         self.alveoURL = False
 
-        if schema.scheme is not '' and schema.netloc is not '':
-            self.validURL = True
-
-        if schema.netloc in app.config['ALVEO_DOMAINS']:
-            self.alveoURL = True
+        if schema.scheme is not '':
+            if schema.netloc in app.config['ALVEO_DOMAINS']:
+                self.alveoURL = True
+                self.validURL = True
+            elif schema.netloc is not '' and app.config['ALLOW_GENERIC_URL']:
+                self.validURL = True
 
     def _validate_path(self):
         """ Validates whether the directory exists or not. Creates the directory if it does not exist. Should not be called from outside the class. """
