@@ -10,11 +10,8 @@ Python application to support segmentation of audio files for alveo-transcriber.
 2. Install Flask dependencies
   - pip install -r requirements.txt
 
-3. Set up database fixtures
-  - python manage.py gendb sample
-
-4. Run the Flask application
-  - python manage.py runserver
+3. Run the Flask application
+  - python run.py
 
 # Important
 Use of the Alveo service requires an API key to be configured. From PyAlveo documents:
