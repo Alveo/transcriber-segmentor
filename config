@@ -1,22 +1,4 @@
-SQLALCHEMY_DATABASE_URI = 'sqlite:////tmp/test.db'
-# SQLALCHEMY_DATABASE_URI = 'postgresql://user:pass@localhost/dbname'
-
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-SESSION_TYPE = 'filesystem'
-CSRF_ENABLED = True
-
-# Should be regenerated randomly before deployment
-SECRET_KEY = 'dgihahsfhi291924j1g8hrfh238'
-
-# Debug = False for testing/production
-# Development = False for production
-DEBUG = True # Off for testing/production
-DEVELOPMENT = True # Off for production
-
 MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge exception
-
-# Time configuration
-TIMEZONE = 'Australia/Sydney'
 
 # Audioseg configuration
 SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
