@@ -1,16 +1,10 @@
 import os
-
 from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 BASE_FOLDER = os.path.abspath(os.path.join(os.path.dirname( __file__ ), '..'))
 app.static_folder = os.path.join(BASE_FOLDER, 'static')
 app.config.from_pyfile('../config')
-
-db = SQLAlchemy(app)
-
-app.config['SQLALC_INSTANCE'] = db
 
 # Allow cross origin headers only on dev mode
 if app.config['DEVELOPMENT'] == True:
