@@ -8,6 +8,7 @@ SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
 
 # Downloader configuration
 ALLOW_GENERIC_URL = True
+ALLOW_FILE_POST = True
 DOWNLOAD_CACHE_PATH = '/tmp/transcriber-segmentor/'
 ALVEO_DOMAINS = ['alveo.edu.au',
                  'app.alveo.edu.au',
