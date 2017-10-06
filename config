@@ -1,10 +1,12 @@
+import os
+
 # Set to allow Alveo-Transcriber to access if hosted on a different domain
 ACCESS_CONTROL_ALLOW_ORIGIN = '*'
 
 MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge exception
 
 # Audioseg configuration
-SSAD_PATH = '/home/audioseg/audioseg-1.2.2/src/ssad'
+SSAD_PATH = os.path.expanduser('~') + '/' + 'audioseg-1.2.2/src/ssad'
 
 # Downloader configuration
 ALLOW_GENERIC_URL = True
@@ -14,3 +16,7 @@ ALVEO_DOMAINS = ['alveo.edu.au',
                  'app.alveo.edu.au',
                  'www.alveo.edu.au',
                  'staging.alveo.edu.au']
+
+# PyAlveo configuration
+PYALVEO_CONFIG_PATH = os.path.expanduser('~') + '/' + 'alveo.config'
+PYALVEO_CACHE_DIR = os.path.expanduser('~') + '/' + 'alveo_cache/'

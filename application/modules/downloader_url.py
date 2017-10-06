@@ -72,7 +72,7 @@ class URLDownloader:
         exit_code = 200
 
         # TODO Alveo exceptions
-        client = pyalveo.Client(use_cache=False)
+        client = pyalveo.Client(configfile=app.config['PYALVEO_CONFIG_PATH'], use_cache=True, cache_dir=app.config['PYALVEO_CACHE_DIR'])
         doc = client.get_document(self.url)
 
         # TODO File exceptions
