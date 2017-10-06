@@ -1,6 +1,5 @@
-import os
 import uuid
-from flask import redirect, jsonify, request
+from flask import jsonify, request
 
 from application import app
 from application.modules.downloader_url import URLDownloader
@@ -19,16 +18,10 @@ def server_error(error):
     """ 500 handler """
     return "500"
 
-@app.before_first_request
-def init():
-    pass
-
-@app.route('/')
-def serve():
-    return "Index"
-
 @app.route('/api/segment/url')
 def segment_url():
+    """ Segments a file via a specified url argument. Returns JSON if successful, else redirects an error message received from the resource. """
+
     status = ""
     url = request.args.get('url', default="", type=str)
 
@@ -36,12 +29,14 @@ def segment_url():
     downloader = URLDownloader(url, filename)
 
     if downloader.isValid():
+        # Try download the file from the specified resource
         status = downloader.download();
 
-        # Confirm the file type is audio
         if status == 200:
+            # Attempt to segment the file
             processor = AudioSegmentor(filename)
             if processor.isValid():
+                # Return pure JSON to the client
                 status = jsonify(processor.segment())
             else: 
                 status = "{error: \"Specified URL did not contain a valid .wav audio file.\"}"
@@ -51,25 +46,29 @@ def segment_url():
         status = "{error: \"URL pattern is not valid. Example: http://example.com/\"}"
 
     if status is "":
-        status = "An unknown error occurred."
+        status = "{error: \"An unknown error occurred.\"}"
 
     downloader.cleanup()
-
     return status
 
 @app.route('/api/segment/upload', methods=['POST'])
 def segment_upload():
+    """ Segments a file receied via POST from a client. Returns JSON if successful, else an error message. """
+
     status = ""
     if 'file' in request.files:
         filedata = request.files['file']
         if filedata.filename is not "":
             filename = app.config['DOWNLOAD_CACHE_PATH'] + str(uuid.uuid4())
 
+            # Save the file for audiosegmentor
             downloader = PostDownloader(filename, filedata)
             downloader.save()
 
+            # Attempt to segment the file
             processor = AudioSegmentor(filename)
             if processor.isValid():
+                # Return pure JSON to the client
                 status = jsonify(processor.segment())
             else: 
                 status = "{error: \"Uploaded file is not a valid .wav audio file.\"}"
@@ -79,8 +78,7 @@ def segment_upload():
         status = "{error: \"No file attached to query.\"}"
 
     if status is "":
-        status = "An unknown error occurred."
+        status = "{error: \"An unknown error occurred.\"}"
 
     downloader.cleanup()
-
     return status
