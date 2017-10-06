@@ -73,12 +73,16 @@ class URLDownloader:
 
         # TODO Alveo exceptions
         client = pyalveo.Client(configfile=app.config['PYALVEO_CONFIG_PATH'], use_cache=True, cache_dir=app.config['PYALVEO_CACHE_DIR'])
-        doc = client.get_document(self.url)
+        try:
+            doc = client.get_document(self.url)
 
-        # TODO File exceptions
-        f = open(self.filename, 'wb')
-        f.write(doc)
-        f.close()
+            f = open(self.filename, 'wb')
+            f.write(doc)
+            f.close()
+        except pyalveo.pyalveo.APIError as e:
+            exit_code = e.http_status_code
+        except IOError as e:
+            exit_code = 500
 
         return exit_code
 
@@ -93,6 +97,8 @@ class URLDownloader:
             exit_code = exception.code
         except urllib.error.URLError as exception:
             exit_code = exception.reason
+        except IOError as e:
+            status = 500
 
         return exit_code
 
