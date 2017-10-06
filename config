@@ -9,8 +9,13 @@ MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge ex
 SSAD_PATH = os.path.expanduser('~') + '/' + 'audioseg-1.2.2/src/ssad'
 
 # Downloader configuration
-ALLOW_GENERIC_URL = True
-ALLOW_FILE_POST = True
+#
+# ALLOW_GENERIC_URL should be disabled when used outside of testing and development. It poses security risks including denial of service.
+ALLOW_GENERIC_URL = False
+
+# ALLOW_FILE_POST is recommended to be disabled when used outside of testing and development.
+ALLOW_FILE_POST = False
+
 DOWNLOAD_CACHE_PATH = '/tmp/transcriber-segmentor/'
 ALVEO_DOMAINS = ['alveo.edu.au',
                  'app.alveo.edu.au',
