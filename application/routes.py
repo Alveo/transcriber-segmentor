@@ -3,14 +3,21 @@ import uuid
 from flask import redirect, jsonify, request
 
 from application import app
-from application.modules.error_views import not_allowed, not_found, server_error
 from application.modules.downloader_url import URLDownloader
 from application.modules.downloader_post import PostDownloader
 from application.modules.audio_segment import AudioSegmentor
 
-app.register_error_handler(403, not_allowed)
-app.register_error_handler(404, not_found)
-app.register_error_handler(500, server_error)
+def not_allowed(error):
+    """ 403 handler """
+    return "403"
+
+def not_found(error):
+    """ 404 handler """
+    return "404"
+
+def server_error(error):
+    """ 500 handler """
+    return "500"
 
 @app.before_first_request
 def init():
