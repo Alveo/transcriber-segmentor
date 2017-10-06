@@ -23,5 +23,4 @@ app.register_error_handler(500, server_error)
 
 app.add_url_rule('/api/segment/url', 'url', segment_url)
 if app.config['ALLOW_FILE_POST']:
-    print(app.config['ALLOW_FILE_POST'])
     app.add_url_rule('/api/segment/upload', 'upload', segment_upload, methods=['POST'])
