@@ -1,0 +1,21 @@
+version: '3.3'
+services:
+  nginx:
+    restart: always
+    image: nginx:latest
+    links:
+      - web:web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./utility/nginx.conf:/etc/nginx/conf.d/flask.conf
+  web:
+    build: .
+    restart: always
+    command: bash -c "/env/bin/gunicorn application:app -b :8000"
+    volumes:
+      - ./application:/application
+      - ./config:/config
+      - ./alveo.config:/root/alveo.config
+    expose:
+      - "8000"

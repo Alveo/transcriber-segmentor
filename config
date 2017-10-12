@@ -3,10 +3,10 @@ import os
 # Set to allow Alveo-Transcriber to access if hosted on a different domain
 ACCESS_CONTROL_ALLOW_ORIGIN = '*'
 
-MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge exception
-
 # Audioseg configuration
 SSAD_PATH = 'ssad'
+
+MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge exception
 
 # Downloader configuration
 #
