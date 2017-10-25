@@ -37,9 +37,8 @@ RUN cd / &&\
     env/bin/pip install -r /requirements.pip gunicorn &&\
     rm /requirements.pip
 
-EXPOSE 8000/tcp
-ADD application/ /application/
-ADD config/ /config
-ADD alveo.config /root/alveo.config
+EXPOSE 80/tcp
+COPY application/ /application/
+COPY  config/ /config
 
 CMD /env/bin/gunicorn application:app --bind :8000
