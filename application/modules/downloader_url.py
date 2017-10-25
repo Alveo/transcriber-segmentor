@@ -72,9 +72,12 @@ class URLDownloader:
         exit_code = 200
 
         # TODO Alveo exceptions
-        client = pyalveo.Client(configfile=app.config['PYALVEO_CONFIG_PATH'], use_cache=True, cache_dir=app.config['PYALVEO_CACHE_DIR'])
+        client = pyalveo.Client(api_key=app.config['PYALVEO_API_KEY'],
+                api_url=app.config['PYALVEO_API_URL'],
+                use_cache=True, cache_dir=app.config['PYALVEO_CACHE_DIR'])
         try:
-            doc = client.get_document(self.url)
+            url = urllib.parse.urlparse(self.url)
+            doc = client.get_document(url.path)
 
             f = open(self.filename, 'wb')
             f.write(doc)

@@ -1,5 +1,8 @@
 import os
 
+DEBUG=True
+DEVELOPMENT=True
+
 # Set to allow Alveo-Transcriber to access if hosted on a different domain
 ACCESS_CONTROL_ALLOW_ORIGIN = '*'
 
@@ -22,6 +25,8 @@ ALVEO_DOMAINS = ['alveo.edu.au',
                  'www.alveo.edu.au',
                  'staging.alveo.edu.au']
 
+PYALVEO_API_KEY = os.environ.get("ALVEO_API_KEY", None)
+PYALVEO_API_URL = os.environ.get("ALVEO_API_URL", None)
+
 # PyAlveo configuration
-PYALVEO_CONFIG_PATH = os.path.expanduser('~') + '/' + 'alveo.config'
 PYALVEO_CACHE_DIR = os.path.expanduser('~') + '/' + 'alveo_cache/'
