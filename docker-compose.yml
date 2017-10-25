@@ -13,9 +13,13 @@ services:
     build: .
     restart: always
     command: bash -c "/env/bin/gunicorn application:app --bind :8000"
+    #command: bash -c "/env/bin/python -u run.py"
     volumes:
       - ./application:/application
       - ./config:/config
-      - ./alveo.config:/root/alveo.config
+      #- ./run.py:/run.py
+    environment:
+      - ALVEO_API_KEY=
+      - ALVEO_API_URL=https://staging.alveo.edu.au/
     expose:
       - "8000"
