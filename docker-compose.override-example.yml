@@ -1,0 +1,5 @@
+version: '3.3'
+services:
+  web:
+    environment:
+      - ALVEO_API_KEY=wCTRNdjyxUxzxvnmmp9B

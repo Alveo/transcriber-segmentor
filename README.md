@@ -1,6 +1,11 @@
 # transcriber-segmentor
 Python application to support segmentation of audio files for alveo-transcriber.
 
+## Config (docker-compose)
+### Alveo API
+- `cp docker-compose.override-example.yml docker-compose.override.yml`
+- edit docker-compose.override, put your Alveo API key in here
+
 ## Setup (docker-compose)
 1. Install docker, docker-compose
 2. docker-compose build
