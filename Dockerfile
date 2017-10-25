@@ -37,8 +37,8 @@ RUN cd / &&\
     env/bin/pip install -r /requirements.pip gunicorn &&\
     rm /requirements.pip
 
-EXPOSE 80/tcp
+EXPOSE 8000/tcp
 COPY application/ /application/
 COPY  config/ /config
 
-CMD /env/bin/gunicorn application:app --bind :80
+CMD /env/bin/gunicorn application:app --bind :8000
