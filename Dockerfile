@@ -41,4 +41,4 @@ EXPOSE 80/tcp
 COPY application/ /application/
 COPY  config/ /config
 
-CMD /env/bin/gunicorn application:app --bind :8000
+CMD /env/bin/gunicorn application:app --bind :80
