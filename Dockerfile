@@ -36,3 +36,10 @@ RUN cd / &&\
     virtualenv --python=python3 env &&\
     env/bin/pip install -r /requirements.pip gunicorn &&\
     rm /requirements.pip
+
+EXPOSE 8000/tcp
+ADD application/ /application/
+ADD config/ /config
+ADD alveo.config /root/alveo.config
+
+CMD /env/bin/gunicorn application:app --bind :8000
