@@ -4,6 +4,8 @@ RUN apt-get update && apt-get -y install build-essential curl python3 python-vir
 
 RUN mkdir /tmp/audioseg
 
+ADD Procfile /Procfile
+
 RUN cd /tmp/audioseg &&\
     curl -s -O http://mirror.switch.ch/ftp/mirror/gnu/gsl/gsl-2.4.tar.gz &&\
     tar -xzf gsl-2.4.tar.gz &&\
