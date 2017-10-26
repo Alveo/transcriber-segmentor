@@ -6,9 +6,9 @@ services:
     links:
       - web:web
     ports:
-      - "8080:8080"
+      - "8060:8060"
     volumes:
-      - ./utility/nginx.conf:/etc/nginx/conf.d/flask.conf
+      - ./utility/nginx.default.conf:/etc/nginx/conf.d/nginx.default.conf
   web:
     build: .
     restart: always
