@@ -10,19 +10,19 @@ Python application to support segmentation of audio files for alveo-transcriber.
 1. `mkdir ./ssl`
 2. `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ssl/ssl.key -out ./ssl/ssl.crt`
 3. `openssl dhparam -out ./ssl/dhparam.pem 2048`
-4. edit `docker-compose.override.yml`, 
 
 ### docker-compose
 1. Install docker, docker-compose
-2. docker-compose build
-3. docker-compose up -d
+2. Ensure a docker-compose.yml file is configured
+3. `docker-compose build`
+4. `docker-compose up -d`
 
 ## Example usage
-### Alveo document URL
-http://localhost:8080/api/segment/url?url=https://staging.alveo.edu.au/catalog/austalk/1_114_3_8_001/document/1_114_3_8_001-ch6-speaker16.wav
+### Transcribe an Alveo document URL
+`https://localhost:8080/api/segment/url?url=https://staging.alveo.edu.au/catalog/austalk/1_114_3_8_001/document/1_114_3_8_001-ch6-speaker16.wav`
 
-### Generic URL
-http://localhost:8080/api/segment/url?url=https://localhost:8080/test.wav
+### Transcribe a generic URL
+`https://localhost:8080/api/segment/url?url=https://localhost:8080/test.wav`
 
-### POST
-curl -F "file=@test.wav" http://localhost:8080/api/segment/upload
+### Transcribe via a POST
+`curl -F "file=@test.wav" https://localhost:8080/api/segment/upload`
