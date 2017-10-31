@@ -1,5 +1,5 @@
 # transcriber-segmentor
-Python application to support segmentation of audio files for alveo-transcriber.
+Python application to support segmentation of speech audio files.
 
 ## Config
 1. See docker-compose.yml.dist
@@ -14,16 +14,16 @@ Python application to support segmentation of audio files for alveo-transcriber.
 ### docker-compose
 1. Install docker, docker-compose
 2. Ensure a docker-compose.yml file is configured
-3. Consider editing `config`
+3. Consider editing config
 4. `docker-compose build`
 5. `docker-compose up -d`
 
 ## Example usage
 ### Transcribe an Alveo document URL
-`https://localhost:8080/api/segment/url?url=https://staging.alveo.edu.au/catalog/austalk/1_114_3_8_001/document/1_114_3_8_001-ch6-speaker16.wav`
+`curl https://localhost:8080/api/segment/url?url=https://staging.alveo.edu.au/catalog/austalk/1_114_3_8_001/document/1_114_3_8_001-ch6-speaker16.wav`
 
 ### Transcribe a generic URL
-`https://localhost:8080/api/segment/url?url=https://localhost:8080/test.wav`
+`curl https://localhost:8080/api/segment/url?url=https://localhost:8080/test.wav`
 
 ### Transcribe via a POST
 `curl -F "file=@test.wav" https://localhost:8080/api/segment/upload`
