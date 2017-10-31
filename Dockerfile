@@ -41,5 +41,4 @@ RUN cd / && \
     rm /requirements.txt
 
 COPY ./application/ /application
-COPY ./ssl/ /ssl
 COPY ./config /config
