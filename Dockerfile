@@ -25,7 +25,7 @@ RUN cd /tmp/audioseg && \
 
 COPY utility/ssad.patch /tmp/audioseg/ssad.patch
 RUN cd /tmp/audioseg && \
-    curl -s -O http://gforge.inria.fr/frs/download.php/file/31320/audioseg-1.2.2.tar.gz && \
+    curl -k -s -O https://gforge.inria.fr/frs/download.php/file/31320/audioseg-1.2.2.tar.gz && \
     tar -xzf audioseg-1.2.2.tar.gz && \
     patch audioseg-1.2.2/src/ssad.c ssad.patch && \
     cd audioseg-1.2.2 && \
