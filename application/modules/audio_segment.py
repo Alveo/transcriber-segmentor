@@ -25,4 +25,4 @@ class AudioSegmentor:
 
     def segment(self):
         """ Returns SSAD information as JSON. """
-        return sad(self.wave_file, 2)
+        return sad(self.wave_file, app.config['SSAD_AGGRESSIVENESS'])

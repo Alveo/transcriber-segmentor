@@ -6,8 +6,7 @@ DEVELOPMENT=True
 # Set to allow Alveo-Transcriber to access if hosted on a different domain
 ACCESS_CONTROL_ALLOW_ORIGIN = '*'
 
-# Audioseg configuration
-SSAD_PATH = 'ssad'
+SSAD_AGGRESSIVENESS = 0.2
 
 MAX_CONTENT_LENGTH = 1 * 1024 * 1024 # After 1mb, throw RequestEntityTooLarge exception
 
