@@ -25,6 +25,8 @@ def segment_upload():
                 status = jsonify(processor.segment())
             else: 
                 status = "{error: \"Uploaded file is not a valid .wav audio file.\"}"
+
+            downloader.cleanup()
         else:
             status = "{error: \"No file selected in query.\"}"
     else:
@@ -33,5 +35,4 @@ def segment_upload():
     if status is "":
         status = "{error: \"An unknown error occurred.\"}"
 
-    downloader.cleanup()
     return status
