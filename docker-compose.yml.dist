@@ -13,8 +13,7 @@ services:
 
     environment:
       - ALVEO_API_KEY=
-      - ALVEO_API_URL=https://staging.alveo.edu.au/
-      #- ALVEO_API_URL=https://www.alveo.edu.au/
+      - ALVEO_API_URL=https://www.alveo.edu.au/
       
     ports:
       - "8080:8080"
