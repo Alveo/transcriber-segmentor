@@ -15,5 +15,5 @@ six==1.11.0
 urllib3==1.22
 webrtcvad==2.0.10
 Werkzeug==0.12.2
-flask-script=2.0.6
+flask-script==2.0.6
 gunicorn
