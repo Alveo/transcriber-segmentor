@@ -7,8 +7,8 @@ Python application to support segmentation of speech audio files.
 3. If deploying this outside of a local address, you will need to generate an SSL certificate to avoid mixed content browser errors.
 
 ## Running
-1. Install requirements with pip
-2. `export FLASK_APP=application && flask run`
+1. Install requirements with pip, recommended you use a python virtual environment
+2. `export FLASK_APP=application && python -m flask run`
 
 ## Example usage
 ### Transcribe an Alveo document URL
