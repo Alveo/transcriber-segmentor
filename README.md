@@ -2,21 +2,13 @@
 Python application to support segmentation of speech audio files.
 
 ## Config
-1. See docker-compose.yml.dist
+1. See `config` file
 2. If you plan to use the Alveo API, it is recommended that you set the `ALVEO_API_KEY` environment variable accordingly
+3. If deploying this outside of a local address, you will need to generate an SSL certificate to avoid mixed content browser errors.
 
-## Setup
-### SSL
-1. `mkdir ./ssl`
-2. `openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout ./ssl/ssl.key -out ./ssl/ssl.crt`
-3. `openssl dhparam -out ./ssl/dhparam.pem 2048`
-
-### docker-compose
-1. Install docker, docker-compose
-2. Ensure a docker-compose.yml file is configured
-3. Consider editing config
-4. `docker-compose build`
-5. `docker-compose up -d`
+## Running
+1. Install requirements with pip
+2. `export FLASK_APP=application && flask run`
 
 ## Example usage
 ### Transcribe an Alveo document URL
