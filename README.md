@@ -8,6 +8,7 @@ Python application to support segmentation of speech audio files.
 
 ## Running
 1. Install requirements with pip, recommended you use a python virtual environment
+2. Optionally enable debug `export FLASK_DEBUG=1`
 2. `export FLASK_APP=application && python -m flask run`
 
 ## Example usage

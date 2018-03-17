@@ -1,8 +1,5 @@
 import os
 
-DEBUG = True
-DEVELOPMENT = True
-
 # Set to allow transcriber to access if hosted on a different domain
 ACCESS_CONTROL_ALLOW_ORIGIN = '*'
 
