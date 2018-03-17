@@ -4,6 +4,7 @@ from flask import jsonify, request
 from application import app
 from application.modules.downloader_url import URLDownloader
 from application.modules.audio_segment import AudioSegmentor
+from application.modules.api_error import api_error
 
 @app.route('/api/segment/url')
 def segment_url():
@@ -26,14 +27,14 @@ def segment_url():
                 # Return pure JSON to the client
                 status = jsonify(processor.segment())
             else: 
-                status = "{error: \"Specified URL did not contain a valid .wav audio file.\"}"
+                status = api_error("Specified URL did not contain a valid .wav audio file.")
         else:
-            status = "{error: \"Resource returned error code "+str(status)+"\".}"
+            status = api_error("Remote URI returned status code: "+str(status))
     else:
-        status = "{error: \"URL pattern is either not valid or not allowed. Example: http://example.com/\"}"
+        status = api_error("URL pattern is either not valid or not allowed. Example: http://example.com/")
 
-    if status is "":
-        status = "{error: \"An unknown error occurred.\"}"
+    if status is "": # Catch any unexpected responses
+        status = api_error("An unknown error occurred.")
 
     downloader.cleanup()
     return status
