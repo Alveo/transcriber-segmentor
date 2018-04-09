@@ -1,21 +1,22 @@
-import uuid
-from flask import jsonify, request
+from flask import jsonify
 
 from application import app
 from application.modules.route_post import segment_upload
 from application.modules.route_url import segment_url
 
+def url_error(error_code):
+    response = jsonify({'error': True, 'code': error_code})
+    response.status_code = error_code;
+    return response
+
 def not_allowed(error):
-    """ 403 handler """
-    return "403"
+    return url_error(403)
 
 def not_found(error):
-    """ 404 handler """
-    return "404"
+    return url_error(404)
 
 def server_error(error):
-    """ 500 handler """
-    return "500"
+    return url_error(500)
 
 app.register_error_handler(403, not_allowed)
 app.register_error_handler(404, not_found)

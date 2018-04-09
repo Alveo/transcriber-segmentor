@@ -1,6 +1,15 @@
 # transcriber-segmentor
 Python application to support segmentation of speech audio files.
 
+## Config
+1. See `config` file
+2. If you plan to use the Alveo API, it is recommended that you set the `ALVEO_API_KEY` environment variable accordingly
+3. If deploying this outside of a local address, you will need to generate an SSL certificate to avoid mixed content browser errors.
+
+## Running
+1. Install requirements with pip, recommended you use a python virtual environment
+2. Optionally enable debug `export FLASK_DEBUG=1`
+3. `export FLASK_APP=application && python -m flask run`
 
 ## Example usage
 ### Transcribe an Alveo document URL
