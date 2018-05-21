@@ -1,3 +1,5 @@
+**Repository deprecated.** See: https://github.com/Alveo/alveo-transcriber-services
+
 # transcriber-segmentor
 Python application to support segmentation of speech audio files.
 
